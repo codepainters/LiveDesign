@@ -1,25 +1,26 @@
 
-This directory contains schematic and PCB files for a simple 
+This directory contains the schematic and PCB files for a simple 
 JTAG pinout converter from Altium's to standard Xilinx 14-pin 
 connector.
 
 Altium uses 26-pin IDC connector which maps directly to
 a DB25 LPT plug. The pinout is as follows:
 
-| Name | Pin | Pin | Name |
-| -    | 1   | 2   | -    |
-| hTDI | 3   | 4   | VREF |
-| hTCK | 5   | 6   | -    |
-| hTMS | 7   | 8   | sTMS |
-| OE   | 9   | 10  | GND  |
-| -    | 11  | 12  | GND  |
-| sTDI | 13  | 14  | GND  |
-| -    | 15  | 16  | GND  |
-| sTCK | 17  | 18  | GND  |
-| sTDO | 19  | 20  | GND  |
-| -    | 21  | 22  | GND  |
-| -    | 23  | 24  | GND  |
-| hTDO | 25  | 26  | -    |
+| Name | Pin | Pin | Name  |
+|------|-----|-----|-------|
+| -    | 1   | 2   | -     |
+| hTDI | 3   | 4   | hVREF |
+| hTCK | 5   | 6   | -     |
+| hTMS | 7   | 8   | sTMS  |
+| OE   | 9   | 10  | GND   |
+| -    | 11  | 12  | GND   |
+| sTDI | 13  | 14  | GND   |
+| -    | 15  | 16  | GND   |
+| sTCK | 17  | 18  | GND   |
+| sTDO | 19  | 20  | GND   |
+| -    | 21  | 22  | GND   |
+| -    | 23  | 24  | GND   |
+| hTDO | 25  | 26  | -     |
 
 Note:
  
