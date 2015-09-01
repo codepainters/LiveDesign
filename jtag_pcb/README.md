@@ -3,6 +3,8 @@ This directory contains the schematic and PCB files for a simple
 JTAG pinout converter from Altium's to standard Xilinx 14-pin 
 connector.
 
+![JTAG PCB](../img/jtag_pcb.jpg)
+
 Altium uses 26-pin IDC connector which maps directly to
 a DB25 LPT plug. The pinout is as follows:
 
