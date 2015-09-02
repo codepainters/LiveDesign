@@ -1,0 +1,298 @@
+#
+# UCF file for Altium LiveDesign, Xilinx XC3S1000 version.
+#
+# Author: Przemyslaw Wegrzyn <pwegrzyn@codepainters.com>
+#
+
+#
+# 50MHz on-board clock
+#
+NET "FCLK"          LOC = "AA12";
+
+#
+# PS/2 Keyboard connector - connected directly to FPGA via 100R resistors.
+#
+NET "KB_CLOCK"      LOC = "F20";
+NET "KB_DATA"       LOC = "G19";
+
+#
+# PS/2 Mouse connector - connected directly to FPGA via 100R resistors.
+#
+NET "MOUSE_CLOCK"   LOC = "L17";
+NET "MOUSE_DATA"    LOC = "G18";
+
+#
+# RS232C - connected to MAX3232 voltage converter
+#
+NET "RS232_CTS"     LOC = "F2";
+NET "RS232_RTS"     LOC = "E1";
+NET "RS232_RX"      LOC = "A5";
+NET "RS232_TX"      LOC = "F7";
+
+#
+# VGA output - HSYNC/VSYNC directly to FPGA via 100R resistor, RGB via 
+# resistor ladders.
+#
+NET "RED<0>"        LOC = "D9";
+NET "RED<1>"        LOC = "D7";
+NET "RED<2>"        LOC = "D6";
+NET "GREEN<0>"      LOC = "D10";
+NET "GREEN<1>"      LOC = "C11";
+NET "GREEN<2>"      LOC = "E11";
+NET "BLUE<0>"       LOC = "C13";
+NET "BLUE<1>"       LOC = "A13";
+NET "BLUE<2>"       LOC = "E14";
+NET "HSYNC"         LOC = "A8";
+NET "VSYNC"         LOC = "B14";
+
+#
+# Audio output
+#
+NET "AUDIO_L"       LOC = "W3";
+NET "AUDIO_R"       LOC = "U3";
+
+#
+# Dip switches - pull-ups, switches short to ground.
+#
+NET "SW_DIP<0>"     LOC = "Y6";
+NET "SW_DIP<1>"     LOC = "V6";
+NET "SW_DIP<2>"     LOC = "U7";
+NET "SW_DIP<3>"     LOC = "AA4";
+NET "SW_DIP<4>"     LOC = "AB4";
+NET "SW_DIP<5>"     LOC = "AA5";
+NET "SW_DIP<6>"     LOC = "AB5";
+NET "SW_DIP<7>"     LOC = "AA6";
+
+#
+# User switches (below 7-segment display) - pull-ups, switches 
+# short to ground.
+#
+NET "SW_USER<0>"    LOC = "D1";
+NET "SW_USER<1>"    LOC = "C1";
+NET "SW_USER<2>"    LOC = "B6";
+NET "SW_USER<3>"    LOC = "A15";
+NET "SW_USER<4>"    LOC = "B20";
+NET "SW_USER<5>"    LOC = "C21";
+
+#
+# Test switch - pull-up, switch shorts to ground.
+#
+NET "SW_TEST"       LOC = "Y17";
+
+#
+# User LEDs - anodes connected to FPGA via 270R resistors
+#
+NET "LED<0>"        LOC = "W2";
+NET "LED<1>"        LOC = "Y1";
+NET "LED<2>"        LOC = "Y2";
+NET "LED<3>"        LOC = "Y3";
+NET "LED<4>"        LOC = "W4";
+NET "LED<5>"        LOC = "W5";
+NET "LED<6>"        LOC = "Y5";
+NET "LED<7>"        LOC = "W6";
+
+#
+# 6 digits 7-segment display, common cathode, connected 
+# directly to FPGA via 270R resistors
+#
+NET "DIG0_SEG<0>"   LOC = "C6";
+NET "DIG0_SEG<1>"   LOC = "B8";
+NET "DIG0_SEG<2>"   LOC = "E7";
+NET "DIG0_SEG<3>"   LOC = "C5";
+NET "DIG0_SEG<4>"   LOC = "E6";
+NET "DIG0_SEG<5>"   LOC = "B5";
+NET "DIG0_SEG<6>"   LOC = "A4";
+NET "DIG0_SEG<7>"   LOC = "C7";
+
+NET "DIG1_SEG<0>"   LOC = "B10";
+NET "DIG1_SEG<1>"   LOC = "A12";
+NET "DIG1_SEG<2>"   LOC = "C10";
+NET "DIG1_SEG<3>"   LOC = "A9";
+NET "DIG1_SEG<4>"   LOC = "B9";
+NET "DIG1_SEG<5>"   LOC = "A10";
+NET "DIG1_SEG<6>"   LOC = "E9";
+NET "DIG1_SEG<7>"   LOC = "D11";
+
+NET "DIG2_SEG<0>"   LOC = "E15";
+NET "DIG2_SEG<1>"   LOC = "E16";
+NET "DIG2_SEG<2>"   LOC = "A14";
+NET "DIG2_SEG<3>"   LOC = "D14";
+NET "DIG2_SEG<4>"   LOC = "D13";
+NET "DIG2_SEG<5>"   LOC = "B13";
+NET "DIG2_SEG<6>"   LOC = "E13";
+NET "DIG2_SEG<7>"   LOC = "D15";
+
+NET "DIG3_SEG<0>"   LOC = "B17";
+NET "DIG3_SEG<1>"   LOC = "B18";
+NET "DIG3_SEG<2>"   LOC = "A18";
+NET "DIG3_SEG<3>"   LOC = "B15";
+NET "DIG3_SEG<4>"   LOC = "D17";
+NET "DIG3_SEG<5>"   LOC = "C17";
+NET "DIG3_SEG<6>"   LOC = "E17";
+NET "DIG3_SEG<7>"   LOC = "A19";
+
+NET "DIG4_SEG<0>"   LOC = "D19";
+NET "DIG4_SEG<1>"   LOC = "F18";
+NET "DIG4_SEG<2>"   LOC = "C20";
+NET "DIG4_SEG<3>"   LOC = "C19";
+NET "DIG4_SEG<4>"   LOC = "C18";
+NET "DIG4_SEG<5>"   LOC = "B19";
+NET "DIG4_SEG<6>"   LOC = "D18";
+NET "DIG4_SEG<7>"   LOC = "F17";
+
+NET "DIG5_SEG<0>"   LOC = "F19";
+NET "DIG5_SEG<1>"   LOC = "G17";
+NET "DIG5_SEG<2>"   LOC = "E19";
+NET "DIG5_SEG<3>"   LOC = "D21";
+NET "DIG5_SEG<4>"   LOC = "D20";
+NET "DIG5_SEG<5>"   LOC = "E18";
+NET "DIG5_SEG<6>"   LOC = "C22";
+NET "DIG5_SEG<7>"   LOC = "E20";
+
+#
+# User header A - IO<0> - pin 2 .. IO<17> - pin 19
+# GND on pin 20, VCC or +5V (JP1 jumper) on pin 1
+# 
+NET "IO<0>"         LOC = "V7";
+NET "IO<1>"         LOC = "AA8";
+NET "IO<2>"         LOC = "AB8";
+NET "IO<3>"         LOC = "V8";
+NET "IO<4>"         LOC = "Y10";
+NET "IO<5>"         LOC = "V9";
+NET "IO<6>"         LOC = "W9";
+NET "IO<7>"         LOC = "AA10";
+NET "IO<8>"         LOC = "AB10";
+NET "IO<9>"         LOC = "W10";
+NET "IO<10>"        LOC = "AB11";
+NET "IO<11>"        LOC = "U11";
+NET "IO<12>"        LOC = "AB13";
+NET "IO<13>"        LOC = "AA13";
+NET "IO<14>"        LOC = "V10";
+NET "IO<15>"        LOC = "U10";
+NET "IO<16>"        LOC = "W13";
+NET "IO<17>"        LOC = "Y13";
+
+#
+# User header B - IO<18> - pin 2 .. IO<35> - pin 19
+# GND on pin 20, VCC or +5V (JP2 jumper) on pin 1
+# 
+NET "IO<18>"        LOC = "V14";
+NET "IO<19>"        LOC = "V13";
+NET "IO<20>"        LOC = "AA15";
+NET "IO<21>"        LOC = "W14";
+NET "IO<22>"        LOC = "AB15";
+NET "IO<23>"        LOC = "Y16";
+NET "IO<24>"        LOC = "AA17";
+NET "IO<25>"        LOC = "AA18";
+NET "IO<26>"        LOC = "AB18";
+NET "IO<27>"        LOC = "Y18";
+NET "IO<28>"        LOC = "Y19";
+NET "IO<29>"        LOC = "AB20";
+NET "IO<30>"        LOC = "AA20";
+NET "IO<31>"        LOC = "U16";
+NET "IO<32>"        LOC = "V16";
+NET "IO<33>"        LOC = "V17";
+NET "IO<34>"        LOC = "W16";
+NET "IO<35>"        LOC = "W17";
+
+#
+# Soft JTAG
+#
+NET "SOFT_TCK"      LOC = "F21";
+NET "SOFT_TDI"      LOC = "E22";
+NET "SOFT_TMS"      LOC = "E21";
+NET "SOFT_TDO"      LOC = "D22";
+
+#
+# Static RAM 0 - 256Kx16
+#
+NET "SRAM0_E"       LOC = "L5";
+NET "SRAM0_LB"      LOC = "L1";
+NET "SRAM0_OE"      LOC = "K1";
+NET "SRAM0_UB"      LOC = "K2";
+NET "SRAM0_WE"      LOC = "U4";
+
+NET "SRAM0_A<0>"    LOC = "L6";
+NET "SRAM0_A<1>"    LOC = "K4";
+NET "SRAM0_A<2>"    LOC = "H5";
+NET "SRAM0_A<3>"    LOC = "G6";
+NET "SRAM0_A<4>"    LOC = "F3";
+NET "SRAM0_A<5>"    LOC = "G1";
+NET "SRAM0_A<6>"    LOC = "G2";
+NET "SRAM0_A<7>"    LOC = "K3";
+NET "SRAM0_A<8>"    LOC = "T2";
+NET "SRAM0_A<9>"    LOC = "T1";
+NET "SRAM0_A<10>"   LOC = "U2";
+NET "SRAM0_A<11>"   LOC = "V3";
+NET "SRAM0_A<12>"   LOC = "V1";
+NET "SRAM0_A<13>"   LOC = "W1";
+NET "SRAM0_A<14>"   LOC = "V2";
+NET "SRAM0_A<15>"   LOC = "V5";
+NET "SRAM0_A<16>"   LOC = "V4";
+NET "SRAM0_A<17>"   LOC = "U5";
+NET "SRAM0_A<18>"   LOC = "U6";
+
+NET "SRAM0_D<0>"    LOC = "L4";
+NET "SRAM0_D<1>"    LOC = "L3";
+NET "SRAM0_D<2>"    LOC = "M5";
+NET "SRAM0_D<3>"    LOC = "M4";
+NET "SRAM0_D<4>"    LOC = "M3";
+NET "SRAM0_D<5>"    LOC = "N4";
+NET "SRAM0_D<6>"    LOC = "N3";
+NET "SRAM0_D<7>"    LOC = "T5";
+NET "SRAM0_D<8>"    LOC = "T4";
+NET "SRAM0_D<9>"    LOC = "T6";
+NET "SRAM0_D<10>"   LOC = "M6";
+NET "SRAM0_D<11>"   LOC = "N2";
+NET "SRAM0_D<12>"   LOC = "N1";
+NET "SRAM0_D<13>"   LOC = "M2";
+NET "SRAM0_D<14>"   LOC = "M1";
+NET "SRAM0_D<15>"   LOC = "L2";
+
+#
+# Static RAM 1 - 256Kx16
+#
+NET "SRAM1_E"       LOC = "L22";
+NET "SRAM1_LB"      LOC = "M19";
+NET "SRAM1_OE"      LOC = "L19";
+NET "SRAM1_UB"      LOC = "L20";
+NET "SRAM1_WE"      LOC = "U21";
+
+NET "SRAM1_A<0>"    LOC = "K21";
+NET "SRAM1_A<1>"    LOC = "K22";
+NET "SRAM1_A<2>"    LOC = "K20";
+NET "SRAM1_A<3>"    LOC = "G21";
+NET "SRAM1_A<4>"    LOC = "G22";
+NET "SRAM1_A<5>"    LOC = "M17";
+NET "SRAM1_A<6>"    LOC = "L18";
+NET "SRAM1_A<7>"    LOC = "K19";
+NET "SRAM1_A<8>"    LOC = "V19";
+NET "SRAM1_A<9>"    LOC = "W20";
+NET "SRAM1_A<10>"   LOC = "W19";
+NET "SRAM1_A<11>"   LOC = "Y20";
+NET "SRAM1_A<12>"   LOC = "Y21";
+NET "SRAM1_A<13>"   LOC = "Y22";
+NET "SRAM1_A<14>"   LOC = "W21";
+NET "SRAM1_A<15>"   LOC = "W22";
+NET "SRAM1_A<16>"   LOC = "V21";
+NET "SRAM1_A<17>"   LOC = "V22";
+NET "SRAM1_A<18>"   LOC = "V20";
+
+NET "SRAM1_D<0>"    LOC = "L21";
+NET "SRAM1_D<1>"    LOC = "M22";
+NET "SRAM1_D<2>"    LOC = "M21";
+NET "SRAM1_D<3>"    LOC = "N22";
+NET "SRAM1_D<4>"    LOC = "N21";
+NET "SRAM1_D<5>"    LOC = "U20";
+NET "SRAM1_D<6>"    LOC = "T22";
+NET "SRAM1_D<7>"    LOC = "T21";
+NET "SRAM1_D<8>"    LOC = "V18";
+NET "SRAM1_D<9>"    LOC = "U19";
+NET "SRAM1_D<10>"   LOC = "U18";
+NET "SRAM1_D<11>"   LOC = "T18";
+NET "SRAM1_D<12>"   LOC = "R18";
+NET "SRAM1_D<13>"   LOC = "T17";
+NET "SRAM1_D<14>"   LOC = "M18";
+NET "SRAM1_D<15>"   LOC = "M20";
+
+
