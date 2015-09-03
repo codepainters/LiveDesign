@@ -52,10 +52,10 @@ The board is equipped with connectors for both JTAG chains:
  * IDC14 connector for "hard JTAG", compatible with Xilinx cables
  * IDC10 connector for "soft JTAG", using ARM JTAG pinout
 
-The Xilinx cable requires 3.3V on JTAG `VREF` pin, and initially wanted 
-to connect pin 4 there, unfortunately it doesn't work (scanning the chain,
-reading the ID etc. works fine, but actual programming fails).
+The Xilinx cable requires 3.3V on JTAG `VREF` pin, and initially I planned
+to use pin 4 as `VREF` source, unfortunately it doesn't work (scanning the chain,
+as well as reading the ID etc. works fine, but actual programming fails).
 
-There are two workarounds - one is to remove the jumper `J4` jumper and connect
-its pin 2 to any `VCC` point on LiveDesign board. Another workaround is to
+There are two workarounds - one is to remove the `J4` jumper and connect
+pin 2 of `J4` to any `VCC` point on LiveDesign board. Another workaround is to
 short `R20S` on LiveDesign PCB.
