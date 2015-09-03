@@ -13,12 +13,16 @@ entity top is
          LED      : out std_logic_vector(7 downto 0);
          SW_DIP   : in  std_logic_vector(7 downto 0);
          SW_USER  : in  std_logic_vector(5 downto 0);
+
          DIG0_SEG : out std_logic_vector(7 downto 0);
          DIG1_SEG : out std_logic_vector(7 downto 0);
          DIG2_SEG : out std_logic_vector(7 downto 0);
          DIG3_SEG : out std_logic_vector(7 downto 0);
          DIG4_SEG : out std_logic_vector(7 downto 0);
-         DIG5_SEG : out std_logic_vector(7 downto 0)
+         DIG5_SEG : out std_logic_vector(7 downto 0);
+
+         AUDIO_L  : out std_logic;
+         AUDIO_R  : out std_logic
     );
 
 end top;
@@ -44,6 +48,13 @@ architecture behavioral of top is
         );
     end component;
 
+    component speakers
+        port(clk   : in  std_logic;
+             tick  : in  std_logic;
+             left  : out std_logic;
+             right : out std_logic);
+    end component;
+
     signal slow_tick : std_logic;
     signal led_state : std_logic_vector(7 downto 0) := (0 => '1', others => '0');
 
@@ -54,7 +65,7 @@ begin
         generic map(n => 10, exp => 6)
         port map(clk => FCLK, q => slow_tick);
 
-    disp : digit_disp
+    t_disp : digit_disp
         port map(clk  => FCLK,
                  tick => slow_tick,
                  dig0 => DIG0_SEG,
@@ -64,6 +75,12 @@ begin
                  dig4 => DIG4_SEG,
                  dig5 => DIG5_SEG,
                  sw   => SW_USER);
+
+    t_speakers : speakers
+        port map(clk   => FCLK,
+                 tick  => slow_tick,
+                 left  => AUDIO_L,
+                 right => AUDIO_R);
 
     process(FCLK) is
     begin

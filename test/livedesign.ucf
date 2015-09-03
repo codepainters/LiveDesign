@@ -49,8 +49,8 @@ NET "FCLK"          PERIOD = 50 MHz HIGH 50%;
 #
 # Audio output
 #
-# NET "AUDIO_L"       LOC = "W3" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
-# NET "AUDIO_R"       LOC = "U3" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "AUDIO_L"       LOC = "W3" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
+NET "AUDIO_R"       LOC = "U3" | IOSTANDARD = LVCMOS33 | SLEW = SLOW;
 
 #
 # Dip switches - pull-ups, switches short to ground.
