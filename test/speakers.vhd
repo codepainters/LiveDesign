@@ -46,11 +46,11 @@ begin
     beeper : process(clk) is
     begin
         if rising_edge(clk) and tick = '1' then
-            counter <= counter (counter'high - 1 downto 0) & counter(counter'high);
+            counter <= counter(counter'high - 1 downto 0) & counter(counter'high);
         end if;
     end process;
 
-    left <= sound and counter(0);
+    left  <= sound and counter(0);
     right <= sound and counter(2);
 
 end behavioral;
