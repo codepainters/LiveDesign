@@ -26,6 +26,11 @@ a DB25 LPT plug. The pinout is as follows:
 
 Note:
  
+ * don't get confused by the pin numbering on the Altium schematics. They
+   use the numbers corresponding to pins of the DB25 connector at 
+   the other end of the flat cable. For normal IDC26 numbering use 
+   the table above.
+
  * there are 2 sets of JTAG signals exposed - "hard" one is connected 
    to the FPGA's JTAG pins, this is the one to use to program the FPGA.
    Second one, referred to as "soft", is supposed to be used to debug 
@@ -33,7 +38,8 @@ Note:
    pins: TMS - L21N, TCK - L24P, TDI - L21P, TDO - L17P.
  
  * pin 4 is pulled to `VCC` via 4k7 resistor, not sure what for, but 
-   it seems to be a good candidate for `VREF`
+   it seemed to be a good candidate for `VREF`. Unfortunately, it doesn't
+   work as is (at least with the cable I use), see below.
 
  * pins 15, 21 and 23 are shorted together, but it's irrelevant for us
 
@@ -46,4 +52,10 @@ The board is equipped with connectors for both JTAG chains:
  * IDC14 connector for "hard JTAG", compatible with Xilinx cables
  * IDC10 connector for "soft JTAG", using ARM JTAG pinout
 
+The Xilinx cable requires 3.3V on JTAG `VREF` pin, and initially wanted 
+to connect pin 4 there, unfortunately it doesn't work (scanning the chain,
+reading the ID etc. works fine, but actual programming fails).
 
+There are two workarounds - one is to remove the jumper `J4` jumper and connect
+its pin 2 to any `VCC` point on LiveDesign board. Another workaround is to
+short `R20S` on LiveDesign PCB.
