@@ -2,7 +2,7 @@
 *
 !README.md
 !LICENSE
-!tests
+!test
 !.gitignore
 !**/*.vhd
 !**/*.xise
