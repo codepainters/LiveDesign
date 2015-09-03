@@ -7,7 +7,8 @@
 #
 # 50MHz on-board clock
 #
-NET "FCLK"          LOC = "AA12";
+NET "FCLK"          LOC = "AA12" | IOSTANDARD = LVCMOS33;
+NET "FCLK"          PERIOD = 50 MHz HIGH 50%;
 
 #
 # PS/2 Keyboard connector - connected directly to FPGA via 100R resistors.
@@ -294,5 +295,4 @@ NET "SRAM1_D<12>"   LOC = "R18";
 NET "SRAM1_D<13>"   LOC = "T17";
 NET "SRAM1_D<14>"   LOC = "M18";
 NET "SRAM1_D<15>"   LOC = "M20";
-
 
