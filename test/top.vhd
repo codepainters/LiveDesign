@@ -22,7 +22,13 @@ entity top is
          DIG5_SEG : out std_logic_vector(7 downto 0);
 
          AUDIO_L  : out std_logic;
-         AUDIO_R  : out std_logic
+         AUDIO_R  : out std_logic;
+
+         RED      : out std_logic_vector(2 downto 0);
+         GREEN    : out std_logic_vector(2 downto 0);
+         BLUE     : out std_logic_vector(2 downto 0);
+         HSYNC    : out std_logic;
+         VSYNC    : out std_logic
     );
 
 end top;
@@ -55,6 +61,15 @@ architecture behavioral of top is
              right : out std_logic);
     end component;
 
+    component vga
+        port(clk   : in  std_logic;
+             r     : out std_logic_vector(2 downto 0);
+             g     : out std_logic_vector(2 downto 0);
+             b     : out std_logic_vector(2 downto 0);
+             hsync : out std_logic;
+             vsync : out std_logic);
+    end component;
+
     signal slow_tick : std_logic;
     signal led_state : std_logic_vector(7 downto 0) := (0 => '1', others => '0');
 
@@ -81,6 +96,15 @@ begin
                  tick  => slow_tick,
                  left  => AUDIO_L,
                  right => AUDIO_R);
+
+    t_vga : vga
+        port map(clk   => FCLK,
+                 r     => RED,
+                 g     => GREEN,
+                 b     => BLUE,
+                 hsync => HSYNC,
+                 vsync => VSYNC
+        );
 
     process(FCLK) is
     begin
