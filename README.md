@@ -16,4 +16,5 @@ What's in this repo:
  * [docs](docs) - original docs from Altium
  * [jtag_pcb](jtag_pcb) - a project of small PCB converting Altium's silly 26-pin programming connector into standard Xilinx JTAG
  * [livedesign.ucf](livedesign.ucf) - UCF file for use with Xilinx WebPACK
+ * [test](test) - simple test project
 
