@@ -49,6 +49,10 @@ architecture behavioral of vga is
     -- true at the end of line, controls vsync generation
     signal next_line : boolean := false;
     
+    -- x counter
+    signal bar_x_cnt : integer range 0 to 79;
+    signal bar_cnt : unsigned(2 downto 0);
+    
 begin
     
     hsync_gen : process(clk) is
@@ -122,7 +126,27 @@ begin
     
     vsync <= '0' when vsync_phase = v_pulse else '1';
         
-    r <= "111" when vsync_phase = v_active and hsync_phase = h_active else "000";
+    bar_cnt_process : process(clk) is
+    begin
+        if rising_edge(clk) then
+            if hsync_phase = h_active then
+                if pixel_clk = '1' then
+                    if bar_x_cnt < 79 then
+                        bar_x_cnt <= bar_x_cnt + 1;
+                    else  
+                        bar_x_cnt <= 0;
+                        bar_cnt <= bar_cnt + 1;
+                    end if;
+                end if;                                
+            else
+                bar_x_cnt <= 0;
+                bar_cnt <= "000";
+            end if;
+        end if;
+    end process;        
+       
+               
+    r <= std_logic_vector(bar_cnt) when vsync_phase = v_active and hsync_phase = h_active else "000";
     g <= "000";
     b <= "000";
     
