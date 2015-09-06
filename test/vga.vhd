@@ -58,6 +58,11 @@ architecture behavioral of vga is
     signal bar_x_cnt : integer range 0 to 79;
     signal bar_cnt : unsigned(2 downto 0);
     
+    -- latched color enable signals
+    signal enable_r : std_logic;
+    signal enable_g : std_logic;
+    signal enable_b : std_logic;
+    
 begin
     
     hsync_gen : process(clk) is
@@ -148,11 +153,24 @@ begin
                 bar_cnt <= "000";
             end if;
         end if;
-    end process;        
-                      
-    r <= std_logic_vector(bar_cnt) when en_r = '1' and vsync_phase = v_active and hsync_phase = h_active else "000";
-    g <= std_logic_vector(bar_cnt) when en_g = '1' and vsync_phase = v_active and hsync_phase = h_active else "000";
-    b <= std_logic_vector(bar_cnt) when en_b = '1' and vsync_phase = v_active and hsync_phase = h_active else "000";
+    end process;
+        
+    -- capture color enables during blanking
+    process(clk) is
+    begin
+        if rising_edge(clk) and vsync_phase = v_pulse then
+            enable_r <= en_r;
+            enable_g <= en_g;
+            enable_b <= en_b;
+        end if;
+    end process;
+        
+    r <= std_logic_vector(bar_cnt) when enable_r = '1' 
+        and vsync_phase = v_active and hsync_phase = h_active else "000";
+    g <= std_logic_vector(bar_cnt) when enable_g = '1' 
+        and vsync_phase = v_active and hsync_phase = h_active else "000";
+    b <= std_logic_vector(bar_cnt) when enable_b = '1' 
+        and vsync_phase = v_active and hsync_phase = h_active else "000";
     
 end behavioral;
 
