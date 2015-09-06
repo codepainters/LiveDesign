@@ -63,6 +63,9 @@ architecture behavioral of top is
 
     component vga
         port(clk   : in  std_logic;
+             en_r  : in  std_logic;
+             en_g  : in  std_logic;
+             en_b  : in  std_logic;
              r     : out std_logic_vector(2 downto 0);
              g     : out std_logic_vector(2 downto 0);
              b     : out std_logic_vector(2 downto 0);
@@ -99,6 +102,9 @@ begin
 
     t_vga : vga
         port map(clk   => FCLK,
+                 en_r  => not SW_USER(0),
+                 en_g  => not SW_USER(1),
+                 en_b  => not SW_USER(2),
                  r     => RED,
                  g     => GREEN,
                  b     => BLUE,

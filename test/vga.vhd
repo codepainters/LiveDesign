@@ -11,12 +11,17 @@ use ieee.numeric_std.all;
 
 entity vga is
     port(clk   : in  std_logic;
+        
+         en_r  : in  std_logic;
+         en_g  : in  std_logic;
+         en_b  : in  std_logic;
+
          r     : out std_logic_vector(2 downto 0);
          g     : out std_logic_vector(2 downto 0);
          b     : out std_logic_vector(2 downto 0);
          hsync : out std_logic;
          vsync : out std_logic);
-end vga;
+    end vga;
 
 architecture behavioral of vga is
     
@@ -144,11 +149,10 @@ begin
             end if;
         end if;
     end process;        
-       
-               
-    r <= std_logic_vector(bar_cnt) when vsync_phase = v_active and hsync_phase = h_active else "000";
-    g <= "000";
-    b <= "000";
+                      
+    r <= std_logic_vector(bar_cnt) when en_r = '1' and vsync_phase = v_active and hsync_phase = h_active else "000";
+    g <= std_logic_vector(bar_cnt) when en_g = '1' and vsync_phase = v_active and hsync_phase = h_active else "000";
+    b <= std_logic_vector(bar_cnt) when en_b = '1' and vsync_phase = v_active and hsync_phase = h_active else "000";
     
 end behavioral;
 
