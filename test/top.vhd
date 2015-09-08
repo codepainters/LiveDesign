@@ -78,6 +78,12 @@ architecture behavioral of top is
              vsync : out std_logic);
     end component;
 
+    component uart_test
+        port(clk : in  std_logic;
+             rxd : in  std_logic;
+             txd : out std_logic);
+    end component;
+
     signal slow_tick : std_logic;
     signal led_state : std_logic_vector(7 downto 0) := (0 => '1', others => '0');
 
@@ -117,8 +123,14 @@ begin
                  vsync => VSYNC
         );
 
+    t_uart : uart_test
+        port map(
+            clk => FCLK,
+            rxd => RS232_RX,
+            txd => RS232_TX
+        );
+
     RS232_RTS <= RS232_CTS;
-    RS232_TX  <= RS232_RX;
 
     process(FCLK) is
     begin
