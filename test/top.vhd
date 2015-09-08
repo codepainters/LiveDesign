@@ -9,26 +9,31 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity top is
-    port(FCLK     : in  std_logic;
-         LED      : out std_logic_vector(7 downto 0);
-         SW_DIP   : in  std_logic_vector(7 downto 0);
-         SW_USER  : in  std_logic_vector(5 downto 0);
+    port(FCLK      : in  std_logic;
+         LED       : out std_logic_vector(7 downto 0);
+         SW_DIP    : in  std_logic_vector(7 downto 0);
+         SW_USER   : in  std_logic_vector(5 downto 0);
 
-         DIG0_SEG : out std_logic_vector(7 downto 0);
-         DIG1_SEG : out std_logic_vector(7 downto 0);
-         DIG2_SEG : out std_logic_vector(7 downto 0);
-         DIG3_SEG : out std_logic_vector(7 downto 0);
-         DIG4_SEG : out std_logic_vector(7 downto 0);
-         DIG5_SEG : out std_logic_vector(7 downto 0);
+         DIG0_SEG  : out std_logic_vector(7 downto 0);
+         DIG1_SEG  : out std_logic_vector(7 downto 0);
+         DIG2_SEG  : out std_logic_vector(7 downto 0);
+         DIG3_SEG  : out std_logic_vector(7 downto 0);
+         DIG4_SEG  : out std_logic_vector(7 downto 0);
+         DIG5_SEG  : out std_logic_vector(7 downto 0);
 
-         AUDIO_L  : out std_logic;
-         AUDIO_R  : out std_logic;
+         AUDIO_L   : out std_logic;
+         AUDIO_R   : out std_logic;
 
-         RED      : out std_logic_vector(2 downto 0);
-         GREEN    : out std_logic_vector(2 downto 0);
-         BLUE     : out std_logic_vector(2 downto 0);
-         HSYNC    : out std_logic;
-         VSYNC    : out std_logic
+         RS232_RX  : in  std_logic;
+         RS232_TX  : out std_logic;
+         RS232_CTS : in  std_logic;
+         RS232_RTS : out std_logic;
+
+         RED       : out std_logic_vector(2 downto 0);
+         GREEN     : out std_logic_vector(2 downto 0);
+         BLUE      : out std_logic_vector(2 downto 0);
+         HSYNC     : out std_logic;
+         VSYNC     : out std_logic
     );
 
 end top;
@@ -111,6 +116,9 @@ begin
                  hsync => HSYNC,
                  vsync => VSYNC
         );
+
+    RS232_RTS <= RS232_CTS;
+    RS232_TX  <= RS232_RX;
 
     process(FCLK) is
     begin
