@@ -88,28 +88,13 @@ signal purge              : std_logic := '0';
 signal valid_srl_delay    : std_logic_vector(8 downto 0) := (others => '0');
 signal valid_reg_delay    : std_logic_vector(8 downto 0) := (others => '0');
 signal decode_data_strobe : std_logic := '0';
---
---
-------------------------------------------------------------------------------------
---
--- Attributes to define LUT contents during implementation 
--- The information is repeated in the generic map for functional simulation
---
-------------------------------------------------------------------------------------
---
-attribute INIT : string; 
-attribute INIT of start_srl     : label is "0000";
-attribute INIT of edge_srl      : label is "0000";
-attribute INIT of valid_lut     : label is "0040";
-attribute INIT of purge_lut     : label is "54";
-attribute INIT of strobe_lut    : label is "8";
---
+
 ------------------------------------------------------------------------------------
 --
 -- Start of KCUART_RX circuit description
 --
 ------------------------------------------------------------------------------------
---	
+
 begin
 
   -- Synchronise input serial data to system clock
@@ -132,16 +117,10 @@ begin
   begin
 
      lsbs: if i<7 generate
-     --
-     attribute INIT : string; 
-     attribute INIT of delay15_srl : label is "0000"; 
-     --
      begin
 
        delay15_srl: SRL16E
-       --synthesis translate_off
        generic map (INIT => X"0000")
-       --synthesis translate_on
        port map(   D => data_int(i+1),
                   CE => en_16_x_baud,
                  CLK => clk,
@@ -154,16 +133,10 @@ begin
      end generate lsbs;
 
      msb: if i=7 generate
-     --
-     attribute INIT : string; 
-     attribute INIT of delay15_srl : label is "0000"; 
-     --
      begin
 
        delay15_srl: SRL16E
-       --synthesis translate_off
        generic map (INIT => X"0000")
-       --synthesis translate_on
        port map(   D => stop_bit,
                   CE => en_16_x_baud,
                  CLK => clk,
@@ -190,9 +163,7 @@ begin
   -- Data delays to capture start bit at 16 time baud rate
 
   start_srl: SRL16E
-  --synthesis translate_off
   generic map (INIT => X"0000")
-  --synthesis translate_on
   port map(   D => data_int(0),
              CE => en_16_x_baud,
             CLK => clk,
@@ -213,9 +184,7 @@ begin
   -- Delay ensures data is captured at mid-bit position
 
   edge_srl: SRL16E
-  --synthesis translate_off
   generic map (INIT => X"0000")
-  --synthesis translate_on
   port map(   D => start_bit,
              CE => en_16_x_baud,
             CLK => clk,
@@ -234,9 +203,7 @@ begin
   -- Detect a valid character 
 
   valid_lut: LUT4
-  --synthesis translate_off
   generic map (INIT => X"0040")
-  --synthesis translate_on
   port map( I0 => purge,
             I1 => stop_bit,
             I2 => start_edge,
@@ -252,9 +219,7 @@ begin
   -- Purge of data status 
 
   purge_lut: LUT3
-  --synthesis translate_off
   generic map (INIT => X"54")
-  --synthesis translate_on
   port map( I0 => valid_reg_delay(8),
             I1 => valid_char,
             I2 => purge,
@@ -275,16 +240,10 @@ begin
   begin
 
      lsb: if i=0 generate
-     --
-     attribute INIT : string; 
-     attribute INIT of delay15_srl : label is "0000"; 
-     --
      begin
 
        delay15_srl: SRL16E
-       --synthesis translate_off
        generic map (INIT => X"0000")
-       --synthesis translate_on
        port map(   D => valid_char,
                   CE => en_16_x_baud,
                  CLK => clk,
@@ -297,16 +256,10 @@ begin
      end generate lsb;
 
      msbs: if i>0 generate
-     --
-     attribute INIT : string; 
-     attribute INIT of delay16_srl : label is "0000"; 
-     --
      begin
 
        delay16_srl: SRL16E
-       --synthesis translate_off
        generic map (INIT => X"0000")
-       --synthesis translate_on
        port map(   D => valid_reg_delay(i-1),
                   CE => en_16_x_baud,
                  CLK => clk,
@@ -329,9 +282,7 @@ begin
   -- Form data strobe
 
   strobe_lut: LUT2
-  --synthesis translate_off
   generic map (INIT => X"8")
-  --synthesis translate_on
   port map( I0 => valid_char,
             I1 => en_16_x_baud,
              O => decode_data_strobe );

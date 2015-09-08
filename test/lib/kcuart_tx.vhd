@@ -98,42 +98,19 @@ signal Tx_bit             : std_logic := '0';
 signal decode_Tx_stop     : std_logic := '0';
 signal Tx_stop            : std_logic := '0';
 signal decode_Tx_complete : std_logic := '0';
---
---
-------------------------------------------------------------------------------------
---
--- Attributes to define LUT contents during implementation 
--- The information is repeated in the generic map for functional simulation--
---
-------------------------------------------------------------------------------------
---
-attribute INIT : string; 
-attribute INIT of mux1_lut      : label is "E4FF";
-attribute INIT of mux2_lut      : label is "E4FF";
-attribute INIT of mux3_lut      : label is "E4FF";
-attribute INIT of mux4_lut      : label is "E4FF";
-attribute INIT of ready_lut     : label is "10";
-attribute INIT of start_lut     : label is "0190";
-attribute INIT of run_lut       : label is "1540";
-attribute INIT of hot_state_lut : label is "94";
-attribute INIT of delay14_srl   : label is "0000";
-attribute INIT of stop_lut      : label is "0180";
-attribute INIT of complete_lut  : label is "8";
---
+
 ------------------------------------------------------------------------------------
 --
 -- Start of KCUART_TX circuit description
 --
 ------------------------------------------------------------------------------------
---	
+
 begin
 
   -- 8 to 1 multiplexer to convert parallel data to serial
 
   mux1_lut: LUT4
-  --synthesis translate_off
-    generic map (INIT => X"E4FF")
-  --synthesis translate_on
+  generic map (INIT => X"E4FF")
   port map( I0 => bit_select(0),
             I1 => data_in(0),
             I2 => data_in(1),
@@ -141,9 +118,7 @@ begin
              O => data_01 );
 
   mux2_lut: LUT4
-  --synthesis translate_off
-    generic map (INIT => X"E4FF")
-  --synthesis translate_on
+  generic map (INIT => X"E4FF")
   port map( I0 => bit_select(0),
             I1 => data_in(2),
             I2 => data_in(3),
@@ -151,9 +126,7 @@ begin
              O => data_23 );
 
   mux3_lut: LUT4
-  --synthesis translate_off
-    generic map (INIT => X"E4FF")
-  --synthesis translate_on
+  generic map (INIT => X"E4FF")
   port map( I0 => bit_select(0),
             I1 => data_in(4),
             I2 => data_in(5),
@@ -161,9 +134,7 @@ begin
              O => data_45 );
 
   mux4_lut: LUT4
-  --synthesis translate_off
-    generic map (INIT => X"E4FF")
-  --synthesis translate_on
+  generic map (INIT => X"E4FF")
   port map( I0 => bit_select(0),
             I1 => data_in(6),
             I2 => data_in(7),
@@ -205,10 +176,6 @@ begin
   -- count_carry(2) indicates when terminal count (7) is reached and Tx_bit=1 (ie overflow)
 
   count_width_loop: for i in 0 to 2 generate
-  --
-  attribute INIT : string; 
-  attribute INIT of count_lut : label is "8"; 
-  --
   begin
 
      register_bit: FDRE
@@ -219,9 +186,7 @@ begin
                 C => clk);
 
      count_lut: LUT2
-     --synthesis translate_off
      generic map (INIT => X"8")
-     --synthesis translate_on
      port map( I0 => bit_select(i),
                I1 => Tx_run,
                 O => mask_count(i));
@@ -268,9 +233,7 @@ begin
   -- Ready to start decode
 
   ready_lut: LUT3
-  --synthesis translate_off
   generic map (INIT => X"10")
-  --synthesis translate_on
   port map( I0 => Tx_run,
             I1 => Tx_start,
             I2 => send_character,
@@ -279,9 +242,7 @@ begin
   -- Start bit enable
 
   start_lut: LUT4
-  --synthesis translate_off
   generic map (INIT => X"0190")
-  --synthesis translate_on
   port map( I0 => Tx_bit,
             I1 => Tx_stop,
             I2 => ready_to_start,
@@ -298,9 +259,7 @@ begin
   -- Run bit enable
 
   run_lut: LUT4
-  --synthesis translate_off
   generic map (INIT => X"1540")
-  --synthesis translate_on
   port map( I0 => count_carry(2),
             I1 => Tx_bit,
             I2 => Tx_start,
@@ -316,9 +275,7 @@ begin
   -- Bit rate enable
 
   hot_state_lut: LUT3
-  --synthesis translate_off
   generic map (INIT => X"94")
-  --synthesis translate_on
   port map( I0 => Tx_stop,
             I1 => ready_to_start,
             I2 => Tx_bit,
@@ -331,9 +288,7 @@ begin
              C => clk);
 
   delay14_srl: SRL16E
-  --synthesis translate_off
   generic map (INIT => X"0000")
-  --synthesis translate_on
   port map(   D => hot_state,
              CE => en_16_x_baud,
             CLK => clk,
@@ -352,9 +307,7 @@ begin
   -- Stop bit enable
 
   stop_lut: LUT4
-  --synthesis translate_off
   generic map (INIT => X"0180")
-  --synthesis translate_on
   port map( I0 => Tx_bit,
             I1 => Tx_run,
             I2 => count_carry(2),
@@ -370,9 +323,7 @@ begin
   -- Tx_complete strobe
 
   complete_lut: LUT2
-  --synthesis translate_off
   generic map (INIT => X"8")
-  --synthesis translate_on
   port map( I0 => count_carry(2),
             I1 => en_16_x_baud,
              O => decode_Tx_complete );
@@ -390,5 +341,3 @@ end low_level_definition;
 -- END OF FILE KCUART_TX.VHD
 --
 ------------------------------------------------------------------------------------
-
-
