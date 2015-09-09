@@ -46,6 +46,7 @@ architecture rtl of uart_test is
 
     signal tx_data   : std_logic_vector(7 downto 0);
     signal tx_strobe : std_logic;
+    signal tx_done   : std_logic;
 
 begin
     rx : component kcuart_rx
@@ -63,7 +64,7 @@ begin
             send_character => tx_strobe,
             en_16_x_baud   => baudrate_x16,
             serial_out     => txd,
-            Tx_complete    => open,
+            Tx_complete    => tx_done,
             clk            => clk
         );
 
@@ -88,16 +89,13 @@ begin
             -- so no risk of overflow 
             if prev_rx_strobe = '0' and rx_strobe = '1' then
                 tx_strobe <= '1';
-            else
+                tx_data <= rx_data;
+            elsif tx_done = '1' then            
                 tx_strobe <= '0';
             end if;
             prev_rx_strobe := rx_strobe;
-
         end if;
 
     end process;
-
-    -- echo
-    tx_data <= rx_data;
 
 end architecture;
