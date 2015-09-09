@@ -89,7 +89,14 @@ begin
             -- so no risk of overflow 
             if prev_rx_strobe = '0' and rx_strobe = '1' then
                 tx_strobe <= '1';
-                tx_data <= rx_data;
+                
+                -- for silly test, replace spaces with @
+                if rx_data = x"20" then
+                    tx_data <= x"40";
+                else
+                    tx_data <= rx_data;
+                end if;
+                
             elsif tx_done = '1' then            
                 tx_strobe <= '0';
             end if;
